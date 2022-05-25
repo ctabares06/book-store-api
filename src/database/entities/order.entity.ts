@@ -22,10 +22,10 @@ export class Order {
   @CreateDateColumn()
   order_date: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   delivery_date: Date;
 
-  @Column({ type: 'float' })
+  @Column({ type: 'float', nullable: false })
   total_price: number;
 
   @ManyToOne(() => User, (user) => user.id)
@@ -34,6 +34,11 @@ export class Order {
   @ManyToOne(() => User, (user) => user.id)
   seller: User;
 
-  @Column({ type: 'enum', enum: order_status, default: order_status.pending })
+  @Column({
+    type: 'enum',
+    enum: order_status,
+    default: order_status.pending,
+    nullable: false,
+  })
   status: order_status;
 }

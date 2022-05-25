@@ -21,13 +21,13 @@ export class Book {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   title: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   author: string;
 
-  @Column({ type: 'float' })
+  @Column({ type: 'float', nullable: false })
   price: number;
 
   @ManyToOne(() => User, (user) => user.id)
@@ -39,16 +39,16 @@ export class Book {
   @JoinTable({ name: 'book_genres' })
   genre: Genre[];
 
-  @OneToMany(() => Book_details, (book_details) => book_details.book_id)
+  @OneToMany(() => Book_details, (book_details) => book_details.bookDetailId)
   bookStocks: Book_details[];
 
   @OneToMany(() => Order_items, (order_item) => order_item.book)
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', nullable: false, default: false })
   status: boolean;
 }

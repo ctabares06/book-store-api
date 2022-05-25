@@ -6,6 +6,6 @@ export class Genre {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   name: string;
 }

@@ -14,16 +14,16 @@ export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   firstname: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   lastname: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   email: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   password: string;
 
   @ManyToOne(() => Rol, (rol) => rol.id)
@@ -32,7 +32,7 @@ export class User {
   @ManyToOne(() => Country, (country) => country.currency_code)
   country: Country;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', default: true, nullable: false })
   status: boolean;
 
   @CreateDateColumn()

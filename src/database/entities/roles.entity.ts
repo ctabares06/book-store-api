@@ -6,9 +6,9 @@ export class Rol {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'boolean', nullable: false, default: true })
   status: boolean;
 }

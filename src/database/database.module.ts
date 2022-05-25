@@ -18,6 +18,8 @@ import { EnvVars } from 'src/types/env';
           password: configService.get('PASSWORD'),
           database: configService.get('DB_NAME'),
           entities: [__dirname + '/entities/**/*.entity.ts'],
+          migrations: [__dirname + '/migrations/**/*.ts'],
+          migrationsTableName: 'migrations_list',
         };
       },
       inject: [ConfigService],
