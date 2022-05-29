@@ -1,14 +1,15 @@
-import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm';
-import { Order } from './order.entity';
-import { Book } from './book.entity';
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from './Order.entity';
+import { Book } from './Book.entity';
 
-@Entity()
+@Entity('orderItems')
 export class Order_items {
-  @PrimaryColumn()
-  @Column('int')
-  postId: number;
+  @PrimaryGeneratedColumn('increment')
+  id: number;
 
-  @PrimaryColumn()
+  @Column('int')
+  orderId: number;
+
   @Column('int')
   bookId: number;
 

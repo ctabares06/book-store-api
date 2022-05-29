@@ -1,8 +1,8 @@
 import { Entity, PrimaryColumn, Column, Unique, OneToMany } from 'typeorm';
-import { Book_details } from './book_details.entity';
+import { BookDetails } from './BookDetails.entity';
 
-@Entity('country')
-@Unique('UQ_COUNTRY', ['currency_code'])
+@Entity('countries')
+@Unique('UQ_COUNTRY', ['currencyCode'])
 export class Country {
   @PrimaryColumn({ type: 'varchar', nullable: false })
   code: string;
@@ -10,9 +10,13 @@ export class Country {
   @Column({ type: 'varchar', nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', name: 'currency_code', nullable: false })
-  currency_code: string;
+  @Column({
+    type: 'varchar',
+    name: 'currencyCode',
+    nullable: false,
+  })
+  currencyCode: string;
 
-  @OneToMany(() => Book_details, (book_details) => book_details.bookId)
-  bookStocks: Book_details[];
+  @OneToMany(() => BookDetails, (book_details) => book_details.bookId)
+  bookStocks: BookDetails[];
 }

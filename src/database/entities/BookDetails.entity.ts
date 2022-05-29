@@ -1,11 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Book } from './book.entity';
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Book } from './Book.entity';
 import { Country } from './Country.entity';
 
 enum book_details_status {
@@ -14,23 +8,21 @@ enum book_details_status {
   in_stock = 'in_stock',
 }
 
-@Entity()
-export class Book_details {
+@Entity('bookDetails')
+export class BookDetails {
   @PrimaryGeneratedColumn('increment')
-  bookDetailId: number;
+  id: number;
 
-  @PrimaryColumn()
   @Column('int')
   bookId: number;
 
-  @PrimaryColumn()
   @Column('int')
-  countryId: number;
+  countryCode: string;
 
   @ManyToOne(() => Book, (book) => book.id)
   book: Book[];
 
-  @ManyToOne(() => Country, (country) => country.currency_code)
+  @ManyToOne(() => Country, (country) => country.currencyCode)
   country: Country[];
 
   @Column({ type: 'int', default: 0, nullable: false })

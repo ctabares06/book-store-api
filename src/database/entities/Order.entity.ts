@@ -5,7 +5,7 @@ import {
   ManyToOne,
   CreateDateColumn,
 } from 'typeorm';
-import { User } from './user.entity';
+import { User } from './User.entity';
 
 enum order_status {
   sent = 'sent',
@@ -14,19 +14,19 @@ enum order_status {
   refund = 'refund',
 }
 
-@Entity()
+@Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
   @CreateDateColumn()
-  order_date: Date;
+  orderDate: Date;
 
   @Column({ type: 'date', nullable: false })
-  delivery_date: Date;
+  deliveryDate: Date;
 
   @Column({ type: 'float', nullable: false })
-  total_price: number;
+  totalPrice: number;
 
   @ManyToOne(() => User, (user) => user.id)
   client: User;

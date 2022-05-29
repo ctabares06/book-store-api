@@ -6,10 +6,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Rol } from './roles.entity';
+import { Rol } from './Rol.entity';
 import { Country } from './Country.entity';
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -29,15 +29,15 @@ export class User {
   @ManyToOne(() => Rol, (rol) => rol.id)
   rol: Rol;
 
-  @ManyToOne(() => Country, (country) => country.currency_code)
+  @ManyToOne(() => Country, (country) => country.currencyCode)
   country: Country;
 
   @Column({ type: 'boolean', default: true, nullable: false })
   status: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }

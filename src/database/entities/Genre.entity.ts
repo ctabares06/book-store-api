@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
-@Entity()
+@Entity('genres')
 @Unique('UQ_GENRE', ['name'])
 export class Genre {
   @PrimaryGeneratedColumn('increment')
