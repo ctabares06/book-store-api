@@ -8,8 +8,10 @@ const AppDataSource = new DataSource({
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
   database: process.env.DB_NAME,
-  entities: [join(__dirname, '../database/entities/**/*.entity.ts')],
-  migrations: [join(__dirname, '../database/migrations/**/*.ts')],
+  entities: [
+    join(__dirname, '../../dist/database/entities/**/*.entity.{ts,js}'),
+  ],
+  migrations: [join(__dirname, '../../dist/database/migrations/**/*.{ts,js}')],
   migrationsTableName: 'migrations_history',
   synchronize: false,
   logging: false,
