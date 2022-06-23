@@ -1,14 +1,16 @@
 import {
+  Body,
   Controller,
   Get,
   HttpCode,
   Param,
   Post,
   Put,
-  Req,
 } from '@nestjs/common';
-import { Request } from 'express';
+import { JoiValidationPipe } from 'src/common/validation.pipe';
 import { Country } from 'src/database/entities/Country.entity';
+import { CreateCountryDto, UpdateCountryDto } from './Country.dto';
+import { CreateCountrySchema, UpdateCountrySchema } from './Country.schema';
 import { CountryService } from './Country.service';
 
 @Controller('country')
@@ -23,14 +25,17 @@ export class CountryController {
 
   @Get(':code')
   @HttpCode(200)
-  async findOne(@Param() params): Promise<Country> {
-    return await this.countryService.findByCode(params.code);
+  async findOne(@Param('code') code): Promise<Country> {
+    return await this.countryService.findByCode(code);
   }
 
   @Post()
   @HttpCode(201)
-  async insert(@Req() request: Request): Promise<Country> {
-    const { code, name, currencyCode } = request.body;
+  async insert(
+    @Body(new JoiValidationPipe(CreateCountrySchema))
+    CreateCountryDto: CreateCountryDto,
+  ): Promise<Country> {
+    const { code, name, currencyCode } = CreateCountryDto;
 
     return await this.countryService.create({
       code,
@@ -39,10 +44,14 @@ export class CountryController {
     });
   }
 
-  @Put()
+  @Put(':code')
   @HttpCode(201)
-  async update(@Req() request: Request): Promise<Country> {
-    const { code, name, currencyCode } = request.body;
+  async update(
+    @Body(new JoiValidationPipe(UpdateCountrySchema))
+    UpdateCountryDto: UpdateCountryDto,
+    @Param('code') code,
+  ): Promise<Country> {
+    const { name, currencyCode } = UpdateCountryDto;
 
     return await this.countryService.update({
       code,
